@@ -33,6 +33,10 @@
     %ul
       %li= link_to "Homepage", "/", :id => "home"
       %li= link_to @settings.admin_blog_title, admin_articles_path, :id => "admin-blogs"
+  -elsif current_user.has_role("Parent")
+    %ul
+      %li= link_to "Homepage", "/", :id => "home"
+      %li= link_to "My Profile", edit_admin_person_path(current_user.person), :id => "admin-contacts"
   .signout
     %span.hmenu
       Signed in as
