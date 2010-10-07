@@ -85,7 +85,6 @@
         });
   %body{:id => (@admin ? "admin" : "public")}
     = render :partial => "/layouts/admin_menu" if logged_in? && current_user.is_super_user?
-    = render :partial => "/layouts/parent_menu" if logged_in? && current_user.has_role("Parent")
     = render :partial => "/layouts/templates" if !@admin and @cms_config['website']['demo']
     #wrapper-outer{:class => @cms_config['website']['logo_position'] == "top" ? "top-logo" : "inline-logo"}
       #wrapper-middle
