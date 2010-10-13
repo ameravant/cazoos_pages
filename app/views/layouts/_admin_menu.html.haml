@@ -2,7 +2,7 @@
   - if current_user.has_role(@permissions['admin'])
     %ul
       %li= link_to "Homepage", "/", :id => "home"
-      -unless current_user.is_contributor_only
+      -unless current_user.is_contributor_only?
         %li= link_to "Dashboard", "/admin", :id => "admin-home"
       - if @cms_config['modules']['pages']
         %li= link_to "Assets", admin_assets_path, :id => "admin-assets" if current_user.has_role(@permissions['assets'])
