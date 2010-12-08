@@ -1,5 +1,5 @@
 #admin-menu
-  - if current_user.has_role(@permissions['admin'])
+  - if current_user.has_role(@permissions['admin']) && current_user.is_super_user?
     %ul
       %li= link_to "Homepage", "/", :id => "home"
       -unless current_user.is_contributor_only?
@@ -18,6 +18,7 @@
         %li= link_to @cms_config['site_settings']['events_title'], admin_events_path, :id => "admin-events" if current_user.has_role(@permissions['events'])
       - if @cms_config['modules']['documents']
         %li= link_to "Documents", admin_folders_path, :id => "admin-documents" if current_user.has_role(@permissions['documents'])
+      %li= link_to "Organizations", admin_orgs_path, :id => "admin-orgs" if current_user.has_role(@permissions['orgs'])
       %li= link_to "People", admin_people_path, :id => "admin-contacts" if current_user.has_role(@permissions['people'])
       - if @cms_config['modules']['newsletters']
         %li= link_to "Newsletters", admin_newsletters_path, :id => "admin-newsletters" if current_user.has_role(@permissions['newsletters'])
@@ -37,6 +38,10 @@
     %ul
       %li= link_to "Homepage", "/", :id => "home"
       %li= link_to "My Profile", edit_admin_person_path(current_user.person), :id => "admin-contacts"
+  -elsif current_user.has_role("Organization Owner")
+    %ul
+      %li= link_to "Homepage", "/", :id => "home"
+      %li= link_to "Add New Programs", new_admin_org_event_path(current_user.person.org), :id => "admin-contacts"
   .signout
     %span.hmenu
       Signed in as

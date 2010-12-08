@@ -21,10 +21,12 @@
 - if @page.permalink == "home" and !@settings.homepage_banner.blank?
   - content_for :banner do
     = @settings.homepage_banner
+- if @page.permalink == "home"
+  =render :partial => "camp_searches/form"
     
 - if @page.permalink == 'home' && !logged_in?
   #sign_in_button
-    = link_to "Register Now!", new_person_path, :class => 'bold green'
+    = link_to "Register Now!", new_parent_path, :class => 'bold green'
     
     
     
